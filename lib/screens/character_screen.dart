@@ -17,59 +17,160 @@ class CharacterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.pink.shade50,
+
       appBar: AppBar(
-        title: const Text("Character"),
         backgroundColor: Colors.pink,
         foregroundColor: Colors.white,
+        title: const Text("Character"),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.favorite_border),
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
+
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
 
-            Text(
-              jp,
-              style: const TextStyle(
-                fontSize: 90,
-                fontWeight: FontWeight.bold,
+            Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(30),
+                child: Column(
+                  children: [
+
+                    Text(
+                      jp,
+                      style: const TextStyle(
+                        fontSize: 90,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    const SizedBox(height: 15),
+
+                    Text(
+                      romaji,
+                      style: const TextStyle(
+                        fontSize: 34,
+                        color: Colors.pink,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
 
             const SizedBox(height: 25),
 
-            Text(
-              romaji,
-              style: const TextStyle(
-                fontSize: 32,
-                color: Colors.pink,
-                fontWeight: FontWeight.bold,
+            Card(
+              child: ListTile(
+                leading: const Icon(
+                  Icons.translate,
+                  color: Colors.pink,
+                ),
+                title: const Text("Meaning"),
+                subtitle: Text(
+                  meaning,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            Card(
+              child: ListTile(
+                leading: const Icon(
+                  Icons.menu_book,
+                  color: Colors.pink,
+                ),
+                title: const Text("Example"),
+                subtitle: Text(
+                  example,
+                  style: const TextStyle(fontSize: 22),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 25),
+
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.volume_up),
+                label: const Text(
+                  "Play Pronunciation",
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ),
 
             const SizedBox(height: 30),
 
-            ListTile(
-              leading: const Icon(Icons.translate),
-              title: const Text("Meaning"),
-              subtitle: Text(meaning),
-            ),
+            Row(
+              children: [
 
-            ListTile(
-              leading: const Icon(Icons.book),
-              title: const Text("Example"),
-              subtitle: Text(example),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.arrow_back),
+                    label: const Text("Previous"),
+                  ),
+                ),
+
+                const SizedBox(width: 15),
+
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.arrow_forward),
+                    label: const Text("Next"),
+                  ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 30),
 
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.volume_up),
-              label: const Text("Play Audio"),
+            const Text(
+              "Learning Progress",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
+
+            const SizedBox(height: 10),
+
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: const LinearProgressIndicator(
+                value: 0.2,
+                minHeight: 12,
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            const Text(
+              "1 / 46 Characters Learned",
+            ),
+
+            const SizedBox(height: 30),
+
           ],
         ),
       ),
