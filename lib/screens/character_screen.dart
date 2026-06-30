@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:audioplayers/audioplayers.dart';
 class CharacterScreen extends StatefulWidget {
   final String jp;
   final String romaji;
@@ -20,6 +20,7 @@ class CharacterScreen extends StatefulWidget {
 }
 
 class _CharacterScreenState extends State<CharacterScreen> {
+  final AudioPlayer player = AudioPlayer();
   bool isFavourite = false;
 
   @override
@@ -44,6 +45,11 @@ class _CharacterScreenState extends State<CharacterScreen> {
     });
 
     await prefs.setBool(widget.jp, isFavourite);
+  }
+  Future<void> playAudio() async {
+  await player.play(
+    AssetSource('audio/a.mp3'),
+  );
   }
 
   @override
@@ -138,7 +144,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: playAudio,
                 icon: const Icon(Icons.volume_up),
                 label: const Text(
                   "Play Pronunciation",
