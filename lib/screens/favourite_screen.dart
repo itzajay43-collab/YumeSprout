@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../data/hiragana_data.dart';
+import 'character_screen.dart';
 
 class FavouriteScreen extends StatefulWidget {
   const FavouriteScreen({super.key});
@@ -55,6 +57,10 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           : ListView.builder(
               itemCount: favourites.length,
               itemBuilder: (context, index) {
+                final item = hiragana.firstWhere(
+                  (e) => e.jp == favourites[index],
+                );
+
                 return Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
@@ -63,12 +69,32 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                       color: Colors.red,
                     ),
                     title: Text(
-                      favourites[index],
+                      item.jp,
                       style: const TextStyle(
-                        fontSize: 28,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    subtitle: Text(
+                      "${item.romaji} • ${item.meaning}",
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CharacterScreen(
+                            jp: item.jp,
+                            romaji: item.romaji,
+                            meaning: item.meaning,
+                            example: item.example,
+                            currentIndex: hiragana.indexOf(item),
+                            totalCharacters: hiragana.length,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
