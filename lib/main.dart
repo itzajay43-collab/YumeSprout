@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'services/streak_service.dart';
 import 'screens/bottom_nav_screen.dart';
 import 'services/theme_service.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await StreakService().updateStreak();
+
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeService(),
