@@ -22,4 +22,18 @@ class XpService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(xpKey, 0);
   }
+
+  // ==========================
+  // LEVEL SYSTEM
+  // ==========================
+
+  Future<int> getLevel() async {
+    final xp = await getXP();
+    return (xp ~/ 100) + 1;
+  }
+
+  Future<int> getCurrentLevelXP() async {
+    final xp = await getXP();
+    return xp % 100;
+  }
 }

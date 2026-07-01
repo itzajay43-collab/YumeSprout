@@ -11,12 +11,16 @@ class HomeBanner extends StatelessWidget {
   final streak = await StreakService().getStreak();
   final best = await StreakService().getBestStreak();
   final xp = await XpService().getXP();
+  final level = await XpService().getLevel();
+  final currentXP = await XpService().getCurrentLevelXP();
 
   return {
   "progress": progress,
   "streak": streak,
   "best": best,
   "xp": xp,
+  "level": level,
+  "currentXP": currentXP,
 };
 }
 
@@ -29,6 +33,8 @@ class HomeBanner extends StatelessWidget {
 final streak = snapshot.data?["streak"] ?? 1;
 final best = snapshot.data?["best"] ?? 1;
 final xp = snapshot.data?["xp"] ?? 0;
+final level = snapshot.data?["level"] ?? 1;
+final currentXP = snapshot.data?["currentXP"] ?? 0;
         return Container(
           width: double.infinity,
           padding: const EdgeInsets.all(22),
@@ -123,6 +129,40 @@ Text(
     color: Colors.white,
     fontWeight: FontWeight.bold,
     fontSize: 15,
+  ),
+),
+const SizedBox(height: 8),
+
+Text(
+  "🏆 Level $level",
+  style: const TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 15,
+  ),
+),
+
+const SizedBox(height: 8),
+
+ClipRRect(
+  borderRadius: BorderRadius.circular(20),
+  child: LinearProgressIndicator(
+    value: currentXP / 100,
+    minHeight: 6,
+    backgroundColor: Colors.white24,
+    valueColor: const AlwaysStoppedAnimation<Color>(
+      Colors.amber,
+    ),
+  ),
+),
+
+const SizedBox(height: 4),
+
+Text(
+  "$currentXP / 100 XP",
+  style: const TextStyle(
+    color: Colors.white70,
+    fontSize: 12,
   ),
 ),
 
