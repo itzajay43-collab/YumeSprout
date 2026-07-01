@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/menu_card.dart';
 import 'hiragana_screen.dart';
+import 'katakana_screen.dart';
 import 'favourite_screen.dart';
 import 'search_screen.dart';
 class HomeScreen extends StatelessWidget {
@@ -37,10 +38,17 @@ class HomeScreen extends StatelessWidget {
             ),
 
             MenuCard(
-              icon: Icons.edit,
-              title: "Katakana",
-              onTap: () {},
-            ),
+  icon: Icons.edit,
+  title: "Katakana",
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const KatakanaScreen(),
+      ),
+    );
+  },
+),
 
             MenuCard(
   icon: Icons.search,
