@@ -1,3 +1,4 @@
+import 'dart:math';
 class QuizQuestion {
   final String question;
   final List<String> options;
@@ -35,3 +36,8 @@ final quizQuestions = [
     answer: "E",
   ),
 ];
+List<QuizQuestion> getRandomQuiz() {
+  final questions = List<QuizQuestion>.from(quizQuestions);
+  questions.shuffle(Random());
+  return questions;
+}

@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../services/quiz_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -11,9 +13,23 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   int currentQuestion = 0;
   int score = 0;
+  int bestScore = 0;
+
+  int timeLeft = 10;
+  Timer? timer;
+
+  late List<QuizQuestion> questions;
 
   String selectedAnswer = "";
   bool answered = false;
+
+  @override
+void initState() {
+  super.initState();
+  questions = getRandomQuiz();
+  loadBestScore();
+  startTimer();
+}
 
   void checkAnswer(String answer) {
     if (answered) return;
@@ -22,26 +38,29 @@ class _QuizScreenState extends State<QuizScreen> {
       selectedAnswer = answer;
       answered = true;
 
-      if (answer == quizQuestions[currentQuestion].answer) {
+      if (answer == questions[currentQuestion].answer) {
         score++;
       }
     });
   }
 
   void nextQuestion() {
-    if (currentQuestion < quizQuestions.length - 1) {
+    if (currentQuestion < questions.length - 1) {
       setState(() {
-        currentQuestion++;
-        answered = false;
-        selectedAnswer = "";
-      });
+  currentQuestion++;
+  answered = false;
+  selectedAnswer = "";
+});
+
+startTimer();
     } else {
+      saveBestScore();
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
           title: const Text("🎉 Quiz Finished"),
           content: Text(
-            "Your Score: $score / ${quizQuestions.length}",
+            "Your Score: $score / ${questions.length}",
           ),
           actions: [
             TextButton(
@@ -49,11 +68,13 @@ class _QuizScreenState extends State<QuizScreen> {
                 Navigator.pop(context);
 
                 setState(() {
+                  questions = getRandomQuiz(); // New random quiz
                   currentQuestion = 0;
                   score = 0;
                   answered = false;
                   selectedAnswer = "";
                 });
+                startTimer();
               },
               child: const Text("Restart"),
             ),
@@ -62,10 +83,59 @@ class _QuizScreenState extends State<QuizScreen> {
       );
     }
   }
+  Future<void> loadBestScore() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  setState(() {
+    bestScore = prefs.getInt("bestScore") ?? 0;
+  });
+}
+
+Future<void> saveBestScore() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  if (score > bestScore) {
+    bestScore = score;
+    await prefs.setInt("bestScore", score);
+  }
+}
+void startTimer() {
+  timer?.cancel();
+
+  timeLeft = 10;
+
+  timer = Timer.periodic(
+    const Duration(seconds: 1),
+    (t) {
+      if (!mounted) {
+        t.cancel();
+        return;
+      }
+
+      if (timeLeft > 0) {
+        setState(() {
+          timeLeft--;
+        });
+      } else {
+        t.cancel();
+
+        if (!answered) {
+          checkAnswer("");
+        }
+
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (mounted) {
+            nextQuestion();
+          }
+        });
+      }
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
-    final question = quizQuestions[currentQuestion];
+    final question = questions[currentQuestion];
 
     return Scaffold(
       backgroundColor: Colors.pink.shade50,
@@ -81,13 +151,34 @@ class _QuizScreenState extends State<QuizScreen> {
             const SizedBox(height: 20),
 
             Text(
-              "Question ${currentQuestion + 1} / ${quizQuestions.length}",
+              "Question ${currentQuestion + 1} / ${questions.length}",
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
 
+            Text(
+  "🏆 Best Score: $bestScore / ${questions.length}",
+  style: const TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: Colors.orange,
+  ),
+),
+
+const SizedBox(height: 10),
+
+Text(
+  "⏱ Time Left: $timeLeft",
+  style: const TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: Colors.red,
+  ),
+),
+
+const SizedBox(height: 15),
             const SizedBox(height: 30),
 
             Text(
