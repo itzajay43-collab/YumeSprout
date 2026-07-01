@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/menu_card.dart';
 import 'hiragana_screen.dart';
 import 'favourite_screen.dart';
+import 'search_screen.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -42,10 +43,17 @@ class HomeScreen extends StatelessWidget {
             ),
 
             MenuCard(
-              icon: Icons.language,
-              title: "Vocabulary",
-              onTap: () {},
-            ),
+  icon: Icons.search,
+  title: "Search",
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const SearchScreen(),
+      ),
+    );
+  },
+),
 
             MenuCard(
               icon: Icons.auto_stories,
