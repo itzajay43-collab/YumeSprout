@@ -1,3 +1,6 @@
+import '../services/progress_service.dart';
+import '../data/hiragana_data.dart';
+import '../data/katakana_data.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -29,13 +32,15 @@ class CharacterScreen extends StatefulWidget {
 
 class _CharacterScreenState extends State<CharacterScreen> {
   final AudioPlayer player = AudioPlayer();
+  final ProgressService progressService = ProgressService();
   bool isFavourite = false;
 
   @override
-  void initState() {
-    super.initState();
-    loadFavourite();
-  }
+void initState() {
+  super.initState();
+  loadFavourite();
+  saveProgress();
+}
 
   Future<void> loadFavourite() async {
     final prefs = await SharedPreferences.getInstance();
@@ -44,7 +49,17 @@ class _CharacterScreenState extends State<CharacterScreen> {
       isFavourite = prefs.getBool(widget.jp) ?? false;
     });
   }
+Future<void> saveProgress() async {
+  if (widget.characters == hiragana) {
+    await progressService.saveHiraganaProgress(widget.currentIndex + 1);
+    await progressService.saveLastHiragana(widget.jp);
+  }
 
+  if (widget.characters == katakana) {
+    await progressService.saveKatakanaProgress(widget.currentIndex + 1);
+    await progressService.saveLastKatakana(widget.jp);
+  }
+}
   Future<void> toggleFavourite() async {
     final prefs = await SharedPreferences.getInstance();
 
