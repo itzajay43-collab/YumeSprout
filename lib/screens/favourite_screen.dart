@@ -91,6 +91,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                             example: item.example,
                             currentIndex: hiragana.indexOf(item),
                             totalCharacters: hiragana.length,
+                            characters: hiragana,
                           ),
                         ),
                       );

@@ -7,6 +7,8 @@ import 'hiragana_screen.dart';
 import 'favourite_screen.dart';
 import 'search_screen.dart';
 import 'quiz_screen.dart';
+import 'katakana_screen.dart';
+import '../widgets/continue_learning_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -35,6 +37,11 @@ class HomeScreen extends StatelessWidget {
           children: [
 
             const HomeBanner(),
+            const SizedBox(height: 18),
+
+const ContinueLearningCard(),
+
+const SizedBox(height: 20),
 
             const SizedBox(height: 20),
 
@@ -98,10 +105,17 @@ class HomeScreen extends StatelessWidget {
                   ),
 
                   MenuCard(
-                    icon: Icons.edit,
-                    title: "Katakana",
-                    onTap: () {},
-                  ),
+  icon: Icons.edit,
+  title: "Katakana",
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const KatakanaScreen(),
+      ),
+    );
+  },
+),
 
                   MenuCard(
                     icon: Icons.auto_stories,

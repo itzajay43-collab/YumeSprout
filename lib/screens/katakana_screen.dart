@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../data/katakana_data.dart';
 import 'character_screen.dart';
 
@@ -14,47 +15,43 @@ class KatakanaScreen extends StatelessWidget {
         backgroundColor: Colors.pink,
         foregroundColor: Colors.white,
       ),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(16),
+      body: ListView.builder(
         itemCount: katakana.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
-        ),
         itemBuilder: (context, index) {
           final item = katakana[index];
 
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => CharacterScreen(
-                    jp: item.jp,
-                    romaji: item.romaji,
-                    meaning: item.meaning,
-                    example: item.example,
-                    currentIndex: index,
-                    totalCharacters: katakana.length,
-                  ),
-                ),
-              );
-            },
-            child: Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Center(
+          return Card(
+            margin: const EdgeInsets.all(10),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.pink,
                 child: Text(
                   item.jp,
                   style: const TextStyle(
-                    fontSize: 42,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
+              title: Text(item.romaji),
+              subtitle: Text(item.meaning),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CharacterScreen(
+                      jp: item.jp,
+                      romaji: item.romaji,
+                      meaning: item.meaning,
+                      example: item.example,
+                      currentIndex: index,
+                      totalCharacters: katakana.length,
+                      characters: katakana,
+                    ),
+                  ),
+                );
+              },
             ),
           );
         },

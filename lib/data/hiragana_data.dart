@@ -1,66 +1,66 @@
-import '../models/hiragana_model.dart';
+import '../models/character_model.dart';
 
-const List<HiraganaModel> hiragana = [
-  HiraganaModel(
+const List<CharacterModel> hiragana = [
+  CharacterModel(
     jp: "あ",
     romaji: "A",
     meaning: "Morning",
     example: "あさ",
   ),
 
-  HiraganaModel(
+  CharacterModel(
     jp: "い",
     romaji: "I",
     meaning: "Dog",
     example: "いぬ",
   ),
 
-  HiraganaModel(
+  CharacterModel(
     jp: "う",
     romaji: "U",
     meaning: "Sea",
     example: "うみ",
   ),
 
-  HiraganaModel(
+  CharacterModel(
     jp: "え",
     romaji: "E",
     meaning: "Station",
     example: "えき",
   ),
 
-  HiraganaModel(
+  CharacterModel(
     jp: "お",
     romaji: "O",
     meaning: "Tea",
     example: "おちゃ",
   ),
 // K Row
-const HiraganaModel(
+const CharacterModel(
   jp: "か",
   romaji: "Ka",
   meaning: "Mosquito",
   example: "か",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "き",
   romaji: "Ki",
   meaning: "Tree",
   example: "き",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "く",
   romaji: "Ku",
   meaning: "Sky",
   example: "くも",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "け",
   romaji: "Ke",
   meaning: "Hair",
   example: "け",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "こ",
   romaji: "Ko",
   meaning: "Child",
@@ -68,31 +68,31 @@ const HiraganaModel(
 ),
 
 // S Row
-const HiraganaModel(
+const CharacterModel(
   jp: "さ",
   romaji: "Sa",
   meaning: "Fish",
   example: "さかな",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "し",
   romaji: "Shi",
   meaning: "Poem",
   example: "し",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "す",
   romaji: "Su",
   meaning: "Watermelon",
   example: "すいか",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "せ",
   romaji: "Se",
   meaning: "Back",
   example: "せ",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "そ",
   romaji: "So",
   meaning: "Sky",
@@ -100,62 +100,62 @@ const HiraganaModel(
 ),
 
 // T Row
-const HiraganaModel(
+const CharacterModel(
   jp: "た",
   romaji: "Ta",
   meaning: "Field",
   example: "たんぼ",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "ち",
   romaji: "Chi",
   meaning: "Father",
   example: "ちち",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "つ",
   romaji: "Tsu",
   meaning: "Moon",
   example: "つき",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "て",
   romaji: "Te",
   meaning: "Hand",
   example: "て",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "と",
   romaji: "To",
   meaning: "Door",
   example: "とびら",
 ),
 // N Row
-const HiraganaModel(
+const CharacterModel(
   jp: "な",
   romaji: "Na",
   meaning: "Name",
   example: "なまえ",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "に",
   romaji: "Ni",
   meaning: "Garden",
   example: "にわ",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "ぬ",
   romaji: "Nu",
   meaning: "Cloth",
   example: "ぬの",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "ね",
   romaji: "Ne",
   meaning: "Cat",
   example: "ねこ",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "の",
   romaji: "No",
   meaning: "Drink",
@@ -163,31 +163,31 @@ const HiraganaModel(
 ),
 
 // H Row
-const HiraganaModel(
+const CharacterModel(
   jp: "は",
   romaji: "Ha",
   meaning: "Flower",
   example: "はな",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "ひ",
   romaji: "Hi",
   meaning: "Fire",
   example: "ひ",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "ふ",
   romaji: "Fu",
   meaning: "Ship",
   example: "ふね",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "へ",
   romaji: "He",
   meaning: "Room",
   example: "へや",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "ほ",
   romaji: "Ho",
   meaning: "Book",
@@ -195,31 +195,31 @@ const HiraganaModel(
 ),
 
 // M Row
-const HiraganaModel(
+const CharacterModel(
   jp: "ま",
   romaji: "Ma",
   meaning: "Window",
   example: "まど",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "み",
   romaji: "Mi",
   meaning: "Water",
   example: "みず",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "む",
   romaji: "Mu",
   meaning: "Purple",
   example: "むらさき",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "め",
   romaji: "Me",
   meaning: "Eye",
   example: "め",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "も",
   romaji: "Mo",
   meaning: "Peach",
@@ -227,19 +227,19 @@ const HiraganaModel(
 ),
 
 // Y Row
-const HiraganaModel(
+const CharacterModel(
   jp: "や",
   romaji: "Ya",
   meaning: "Mountain",
   example: "やま",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "ゆ",
   romaji: "Yu",
   meaning: "Snow",
   example: "ゆき",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "よ",
   romaji: "Yo",
   meaning: "Night",
@@ -247,31 +247,31 @@ const HiraganaModel(
 ),
 
 // R Row
-const HiraganaModel(
+const CharacterModel(
   jp: "ら",
   romaji: "Ra",
   meaning: "Camel",
   example: "らくだ",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "り",
   romaji: "Ri",
   meaning: "Apple",
   example: "りんご",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "る",
   romaji: "Ru",
   meaning: "Ruby",
   example: "ルビー",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "れ",
   romaji: "Re",
   meaning: "Zero",
   example: "れい",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "ろ",
   romaji: "Ro",
   meaning: "Corridor",
@@ -279,23 +279,22 @@ const HiraganaModel(
 ),
 
 // W Row
-const HiraganaModel(
+const CharacterModel(
   jp: "わ",
   romaji: "Wa",
   meaning: "I",
   example: "わたし",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "を",
   romaji: "Wo",
   meaning: "Object Marker",
   example: "を",
 ),
-const HiraganaModel(
+const CharacterModel(
   jp: "ん",
   romaji: "N",
   meaning: "Sound N",
   example: "ほん",
 ),
-
 ];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
-import '../data/hiragana_data.dart';
+import '../models/character_model.dart';
 class CharacterScreen extends StatefulWidget {
   final String jp;
   final String romaji;
@@ -9,6 +9,8 @@ class CharacterScreen extends StatefulWidget {
   final String example;
   final int currentIndex;
   final int totalCharacters;
+
+  final List<CharacterModel> characters;
 
   const CharacterScreen({
     super.key,
@@ -18,6 +20,7 @@ class CharacterScreen extends StatefulWidget {
     required this.example,
     required this.currentIndex,
     required this.totalCharacters,
+    required this.characters,
   });
 
   @override
@@ -58,17 +61,18 @@ class _CharacterScreenState extends State<CharacterScreen> {
 }
 
 void nextCharacter() {
-  if (widget.currentIndex < hiragana.length - 1) {
+  if (widget.currentIndex < widget.characters.length - 1) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (_) => CharacterScreen(
-          jp: hiragana[widget.currentIndex + 1].jp,
-          romaji: hiragana[widget.currentIndex + 1].romaji,
-          meaning: hiragana[widget.currentIndex + 1].meaning,
-          example: hiragana[widget.currentIndex + 1].example,
+          jp: widget.characters[widget.currentIndex + 1].jp,
+          romaji: widget.characters[widget.currentIndex + 1].romaji,
+          meaning: widget.characters[widget.currentIndex + 1].meaning,
+          example: widget.characters[widget.currentIndex + 1].example,
           currentIndex: widget.currentIndex + 1,
-          totalCharacters: hiragana.length,
+          totalCharacters: widget.characters.length,
+          characters: widget.characters,
         ),
       ),
     );
@@ -81,12 +85,13 @@ void previousCharacter() {
       context,
       MaterialPageRoute(
         builder: (_) => CharacterScreen(
-          jp: hiragana[widget.currentIndex - 1].jp,
-          romaji: hiragana[widget.currentIndex - 1].romaji,
-          meaning: hiragana[widget.currentIndex - 1].meaning,
-          example: hiragana[widget.currentIndex - 1].example,
+          jp: widget.characters[widget.currentIndex - 1].jp,
+          romaji: widget.characters[widget.currentIndex - 1].romaji,
+          meaning: widget.characters[widget.currentIndex - 1].meaning,
+          example: widget.characters[widget.currentIndex - 1].example,
           currentIndex: widget.currentIndex - 1,
-          totalCharacters: hiragana.length,
+          totalCharacters: widget.characters.length,
+          characters: widget.characters,
         ),
       ),
     );

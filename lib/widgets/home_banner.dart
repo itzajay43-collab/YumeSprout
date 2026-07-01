@@ -9,118 +9,102 @@ class HomeBanner extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
         gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
           colors: [
             Color(0xffEC407A),
             Color(0xffF48FB1),
           ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: Colors.pink.withOpacity(.25),
-            blurRadius: 18,
+            color: Colors.pink.withOpacity(.30),
+            blurRadius: 20,
             offset: const Offset(0, 10),
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          const Text(
-            "🌸 Welcome Back",
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 16,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "🌸 Welcome Back",
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 17,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                const Text(
+                  "YumeSprout",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                const Text(
+                  "Learn Japanese Every Day 🇯🇵",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
+                ),
+
+                const SizedBox(height: 22),
+
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: const LinearProgressIndicator(
+                    value: .35,
+                    minHeight: 8,
+                    backgroundColor: Colors.white24,
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                const Text(
+                  "16 / 46 Characters Completed",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
           ),
 
-          const SizedBox(height: 6),
+          const SizedBox(width: 15),
 
-          const Text(
-            "YumeSprout",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+          Container(
+            width: 85,
+            height: 85,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(.20),
+              shape: BoxShape.circle,
             ),
-          ),
-
-          const SizedBox(height: 20),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              _InfoCard("🔥", "Streak", "7"),
-              _InfoCard("⭐", "Level", "1"),
-              _InfoCard("🏆", "Best", "4/4"),
-            ],
-          ),
-
-          const SizedBox(height: 22),
-
-          const Text(
-            "Learning Progress",
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-
-          const SizedBox(height: 10),
-
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: LinearProgressIndicator(
-              value: .35,
-              minHeight: 10,
-              backgroundColor: Colors.white24,
-              valueColor: AlwaysStoppedAnimation(Colors.white),
+            child: const Center(
+              child: Text(
+                "🌸",
+                style: TextStyle(fontSize: 42),
+              ),
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class _InfoCard extends StatelessWidget {
-  final String emoji;
-  final String title;
-  final String value;
-
-  const _InfoCard(
-    this.emoji,
-    this.title,
-    this.value,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          emoji,
-          style: const TextStyle(fontSize: 22),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          value,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-        Text(
-          title,
-          style: const TextStyle(
-            color: Colors.white70,
-            fontSize: 12,
-          ),
-        ),
-      ],
     );
   }
 }
