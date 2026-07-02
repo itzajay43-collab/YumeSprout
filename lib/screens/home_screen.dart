@@ -3,7 +3,7 @@ import '../widgets/daily_goal_card.dart';
 import '../widgets/home_banner.dart';
 import '../widgets/menu_card.dart';
 import '../widgets/continue_learning_card.dart';
-
+import 'achievement_screen.dart';
 import 'hiragana_screen.dart';
 import 'katakana_screen.dart';
 import 'quiz_screen.dart';
@@ -126,6 +126,19 @@ const SizedBox(height: 20),
                     setState(() {});
                   },
                 ),
+                MenuCard(
+  icon: Icons.emoji_events,
+  title: "Achievements",
+  onTap: () async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const AchievementScreen(),
+      ),
+    );
+    setState(() {});
+  },
+),
 
                 MenuCard(
                   icon: Icons.auto_stories,
