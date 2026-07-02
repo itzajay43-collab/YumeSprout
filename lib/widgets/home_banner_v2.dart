@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_radius.dart';
 import '../theme/app_spacing.dart';
-import '../theme/app_text_styles.dart';
 import 'animated_xp_bar.dart';
 
 class HomeBannerV2 extends StatelessWidget {
@@ -40,7 +39,13 @@ class HomeBannerV2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(AppSpacing.lg),
+      constraints: const BoxConstraints(
+        minHeight: 180,
+      ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.lg,
+        vertical: 18,
+      ),
       decoration: BoxDecoration(
         borderRadius: AppRadius.xl,
         gradient: const LinearGradient(
@@ -67,7 +72,7 @@ class HomeBannerV2 extends StatelessWidget {
             getGreeting(),
             style: const TextStyle(
               color: Colors.white70,
-              fontSize: 16,
+              fontSize: 15,
             ),
           ),
 
@@ -77,73 +82,98 @@ class HomeBannerV2 extends StatelessWidget {
             "Welcome back, $userName 👋",
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 28,
+              fontSize: 26,
               fontWeight: FontWeight.bold,
             ),
           ),
 
-          const SizedBox(height: 6),
+          const SizedBox(height: 10),
 
-          Text(
-            "$levelName • Level $level",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 6,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(.18),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Text(
+              "$levelName • Level $level",
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
           ),
 
-          const SizedBox(height: 25),
+          const SizedBox(height: 16),
 
           Row(
             children: [
 
-              const Icon(
-                Icons.local_fire_department,
-                color: Colors.orange,
-              ),
-
-              const SizedBox(width: 6),
-
-              Text(
-                "$streak Day Streak",
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(.15),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Text(
+                  "🔥 $streak Day",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
 
-              const Spacer(),
+              const SizedBox(width: 10),
 
-              Text(
-                "⭐ $xp XP",
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(.15),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Text(
+                  "⭐ $xp XP",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
           ),
 
-          const SizedBox(height: 18),
+          const SizedBox(height: 14),
 
           AnimatedXPBar(
             progress: currentXP / 100,
             label: "$currentXP / 100 XP",
           ),
 
-          const SizedBox(height: 18),
+          const SizedBox(height: 10),
 
           const Divider(
             color: Colors.white24,
           ),
 
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
 
           const Text(
-            "🌸 One step closer to Japan.",
+            "今日も頑張ろう！\nLet's do our best today.",
             style: TextStyle(
               color: Colors.white,
-              fontSize: 15,
+              fontSize: 14,
+              height: 1.4,
               fontStyle: FontStyle.italic,
             ),
           ),

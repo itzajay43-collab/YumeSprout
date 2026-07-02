@@ -1,92 +1,167 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/app_scaffold.dart';
-import '../widgets/premium_banner.dart';
-import '../widgets/section_title.dart';
-import '../widgets/animated_xp_bar.dart';
+import '../models/home_data.dart';
+import '../services/home_service.dart';
 import '../theme/app_spacing.dart';
+import '../widgets/app_scaffold.dart';
+import '../widgets/home_banner_v2.dart';
+import '../widgets/continue_learning_card_v2.dart';
+import '../widgets/daily_mission_card.dart';
+import '../widgets/collection_hall_card.dart';
+import '../widgets/learning_path_card.dart';
+import '../widgets/japanese_word_card.dart';
+import '../widgets/section_title.dart';
 
 class HomeScreenV2 extends StatelessWidget {
-  const HomeScreenV2({super.key});
+  HomeScreenV2({super.key});
+
+  final HomeService homeService = HomeService();
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
       showAppBar: false,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      child: FutureBuilder<HomeData>(
+        future: homeService.getHomeData(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
 
-            const SizedBox(height: 20),
+          final data = snapshot.data!;
 
-            const PremiumBanner(
-              title: "Good Morning 🌸",
-              subtitle: "今日は何を学びますか？\nWhat will you learn today?",
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                const SizedBox(height: 20),
+
+                HomeBannerV2(
+                  userName: "Ajay",
+                  level: data.level,
+                  levelName: "Blossom",
+                  streak: data.streak,
+                  xp: data.xp,
+                  currentXP: data.currentXP,
+                ),
+
+                const SizedBox(height: 24),
+
+                const SectionTitle(
+                  title: "Today's Journey",
+                  subtitle: "Continue your Japanese adventure",
+                ),
+
+                const SizedBox(height: 16),
+
+                ContinueLearningCardV2(
+                  character: "あ",
+                  title: "Hiragana",
+                  subtitle:
+                      "${data.hiraganaProgress} / 46 Learned",
+                  progress: data.hiraganaProgress / 46,
+                  onTap: () {},
+                ),
+
+                const SizedBox(height: 24),
+
+                const SectionTitle(
+                  title: "Daily Challenge",
+                  subtitle: "Earn bonus XP today",
+                ),
+
+                const SizedBox(height: 16),
+
+                DailyMissionCard(
+                  completed: 2,
+                  total: 5,
+                  onTap: () {},
+                ),
+
+                const SizedBox(height: 24),
+
+                const SectionTitle(
+                  title: "Learning Paths",
+                  subtitle: "Choose your next lesson",
+                ),
+
+                const SizedBox(height: 16),
+
+                Row(
+                  children: [
+                    LearningPathCard(
+                      emoji: "🌸",
+                      title: "Hiragana",
+                      subtitle: "46 Characters",
+                      onTap: () {},
+                    ),
+
+                    const SizedBox(width: 12),
+
+                    LearningPathCard(
+                      emoji: "✏️",
+                      title: "Katakana",
+                      subtitle: "46 Characters",
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 12),
+
+                Row(
+                  children: [
+                    LearningPathCard(
+                      emoji: "📜",
+                      title: "Grammar",
+                      subtitle: "25 Lessons",
+                      onTap: () {},
+                    ),
+
+                    const SizedBox(width: 12),
+
+                    LearningPathCard(
+                      emoji: "🎧",
+                      title: "Listening",
+                      subtitle: "Practice",
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 24),
+
+                const SectionTitle(
+                  title: "Collection Hall",
+                  subtitle: "Achievements & Badges",
+                ),
+
+                const SizedBox(height: 16),
+
+                CollectionHallCard(
+                  achievements: 12,
+                  badges: 8,
+                  onTap: () {},
+                ),
+                const SizedBox(height: 24),
+
+JapaneseWordCard(
+  japanese: "ありがとう",
+  romaji: "Arigatou",
+  meaning: "Thank You",
+),
+
+const SizedBox(height: 24),
+
+                const SizedBox(height: 40),
+              ],
             ),
-
-            const SizedBox(height: 30),
-
-            const AnimatedXPBar(
-              progress: .45,
-              label: "Level 3 • Blossom",
-            ),
-
-            const SizedBox(height: 30),
-
-            const SectionTitle(
-              title: "Today's Journey",
-              subtitle: "Continue your Japanese adventure",
-            ),
-
-            const SizedBox(height: 20),
-
-            Container(
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            const SectionTitle(
-              title: "Daily Challenge",
-              subtitle: "Earn bonus XP today",
-            ),
-
-            const SizedBox(height: 20),
-
-            Container(
-              height: 110,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            const SectionTitle(
-              title: "Collection Hall",
-              subtitle: "Achievements & badges",
-            ),
-
-            const SizedBox(height: 20),
-
-            Container(
-              height: 110,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-            ),
-
-            const SizedBox(height: 40),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
